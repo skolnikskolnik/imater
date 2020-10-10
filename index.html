@@ -81,6 +81,17 @@
             //Stores the month as a number (subtract one since it starts at zero)
             var month = date.getMonth();
             var hourOfDay = date.getHours();
+            var dayOfWeek = date.getDay();
+            var year = date.getFullYear();
+            console.log(year);
+
+
+            //Display them to the screen
+            var dateDisplay = $("#currentDay");
+            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            dateDisplay.text(daysOfWeek[dayOfWeek] + ", " + months[month] + " " + dateOfMonth + ", " + year);
+            
 
         });
     </script>
