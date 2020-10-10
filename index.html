@@ -25,49 +25,49 @@
         <!--Each will need to be in its own row-->
         <!--Using button tags since they are in line-->
         <div class="row" id="nineam">
-            <button class = "hour">9-10 AM</button>
-            <button class = "description">Test</button>
-            <button class = "saveBtn">Test</button>
+            <button class="hour">9-10 AM</button>
+            <button class="description">Test</button>
+            <button class="saveBtn">Test</button>
         </div>
         <div class="row" id="tenam">
-            <button class = "hour">10-11 AM</button>
-            <button class = "description">Test</button>
-            <button class = "saveBtn">Test</button>
+            <button class="hour">10-11 AM</button>
+            <button class="description">Test</button>
+            <button class="saveBtn">Test</button>
         </div>
         <div class="row" id="elevenam">
-            <button class = "hour">11-12 PM</button>
-            <button class = "description">Test</button>
-            <button class = "saveBtn">Test</button>
+            <button class="hour">11-12 PM</button>
+            <button class="description">Test</button>
+            <button class="saveBtn">Test</button>
         </div>
         <div class="row" id="noon">
-            <button class = "hour">12-1 PM</button>
-            <button class = "description">Test</button>
-            <button class = "saveBtn">Test</button>
+            <button class="hour">12-1 PM</button>
+            <button class="description">Test</button>
+            <button class="saveBtn">Test</button>
         </div>
         <div class="row" id="onepm">
-            <button class = "hour">1-2 PM</button>
-            <button class = "description">Test</button>
-            <button class = "saveBtn">Test</button>
+            <button class="hour">1-2 PM</button>
+            <button class="description">Test</button>
+            <button class="saveBtn">Test</button>
         </div>
         <div class="row" id="twopm">
-            <button class = "hour">2-3 PM</button>
-            <button class = "description">Test</button>
-            <button class = "saveBtn">Test</button>
+            <button class="hour">2-3 PM</button>
+            <button class="description">Test</button>
+            <button class="saveBtn">Test</button>
         </div>
         <div class="row" id="threepm">
-            <button class = "hour">3-4 PM</button>
-            <button class = "description">Test</button>
-            <button class = "saveBtn">Test</button>
+            <button class="hour">3-4 PM</button>
+            <button class="description">Test</button>
+            <button class="saveBtn">Test</button>
         </div>
         <div class="row" id="fourpm">
-            <button class = "hour">4-5 PM</button>
-            <button class = "description">Test</button>
-            <button class = "saveBtn">Test</button>
+            <button class="hour">4-5 PM</button>
+            <button class="description">Test</button>
+            <button class="saveBtn">Test</button>
         </div>
         <div class="row" id="fivepm">
-            <button class = "hour">5-6 PM</button>
-            <button class = "description">Test</button>
-            <button class = "saveBtn">Test</button>
+            <button class="hour">5-6 PM</button>
+            <button class="description">Test</button>
+            <button class="saveBtn">Test</button>
         </div>
     </div>
 
@@ -83,15 +83,36 @@
             var hourOfDay = date.getHours();
             var dayOfWeek = date.getDay();
             var year = date.getFullYear();
-            console.log(year);
 
-
-            //Display them to the screen
+            //Display day of week, month, and year to the screen
             var dateDisplay = $("#currentDay");
             var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             dateDisplay.text(daysOfWeek[dayOfWeek] + ", " + months[month] + " " + dateOfMonth + ", " + year);
-            
+
+            //Have three modes, past, present, and future
+            var hourClass = $(".hour");
+
+            //Three types of states: past, present, and future
+
+            //For past, this occurs when Math.floor(current time) is less than the timeNumber
+            var currentTimeFloor = Math.floor(hourOfDay);
+
+            for (var i = 0; i < hourClass.length; i++) {
+                var hourNumber = i + 9;
+                var hourClassIndividual = hourClass[i];
+
+                if(currentTimeFloor > hourNumber){
+                    hourClassIndividual.classList.add("past");
+                }
+                else if(currentTimeFloor == hourNumber){
+                    hourClassIndividual.classList.add("present");
+                }
+                else{
+                    hourClassIndividual.classList.add("future");
+                }
+            }
+
 
         });
     </script>
