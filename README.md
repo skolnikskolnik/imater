@@ -4,6 +4,8 @@
 
 In this program, the user will see the current month, date, and year, as well as an hour-by-hour outline of their work day. As the day progresses, the hours will be color coded, depending on if the hour is past, present or future. This program also allows users to input data and save it such that if they refresh the page, the item will persist. 
 
+[Here is a link to the application](https://skolnikskolnik.github.io/imater/)
+
 ### Screenshots
 
 If there are no previously saved items on the list, the user sees the following:
