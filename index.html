@@ -27,47 +27,47 @@
         <div class="row" id="nineam">
             <button class="hour">9-10 AM</button>
             <input class="description nineam" type="text" id="nineamtext" name="nineamtext">
-            <button class="saveBtn nineam">Test</button>
+            <button class="saveBtn nineam">Submit</button>
         </div>
         <div class="row" id="tenam">
             <button class="hour">10-11 AM</button>
             <input class="description tenam" type="text" id="tenamtext" name="tenamtext">
-            <button class="saveBtn tenam">Test</button>
+            <button class="saveBtn tenam">Submit</button>
         </div>
         <div class="row" id="elevenam">
             <button class="hour">11-12 PM</button>
             <input class="description elevenam" type="text" id="elevenamtext" name="elevenamtext">
-            <button class="saveBtn elevenam">Test</button>
+            <button class="saveBtn elevenam">Submit</button>
         </div>
         <div class="row" id="noon">
             <button class="hour">12-1 PM</button>
             <input class="description noon" type="text" id="noontext" name="noontext">
-            <button class="saveBtn noon">Test</button>
+            <button class="saveBtn noon">Submit</button>
         </div>
         <div class="row" id="onepm">
             <button class="hour">1-2 PM</button>
             <input class="description onepm" type="text" id="onepmtext" name="onepmtext">
-            <button class="saveBtn onepm">Test</button>
+            <button class="saveBtn onepm">Submit</button>
         </div>
         <div class="row" id="twopm">
             <button class="hour">2-3 PM</button>
             <input class="description twopm" type="text" id="twopmtext" name="twopmtext">
-            <button class="saveBtn twopm">Test</button>
+            <button class="saveBtn twopm">Submit</button>
         </div>
         <div class="row" id="threepm">
             <button class="hour">3-4 PM</button>
             <input class="description threepm" type="text" id="threepmtext" name="threepmtext">
-            <button class="saveBtn threepm">Test</button>
+            <button class="saveBtn threepm">Submit</button>
         </div>
         <div class="row" id="fourpm">
             <button class="hour">4-5 PM</button>
             <input class="description fourpm" type="text" id="fourpmtext" name="fourpmtext">
-            <button class="saveBtn fourpm">Test</button>
+            <button class="saveBtn fourpm">Submit</button>
         </div>
         <div class="row" id="fivepm">
             <button class="hour">5-6 PM</button>
             <input class="description" type="text" id="fivepmtext" name="fivepmtext">
-            <button class="saveBtn fivepm">Test</button>
+            <button class="saveBtn fivepm">Submit</button>
         </div>
     </div>
 
@@ -94,7 +94,8 @@
             //Have three modes, past, present, and future
             var hourClass = $(".description");
 
-
+            //Check for existing local storage items
+            displayUserInput();
             //Three types of states: past, present, and future
 
             //For past, this occurs when Math.floor(current time) is less than the timeNumber
@@ -142,18 +143,60 @@
 
                 // validate the fields
 
-                    all_users.push(user)
-                    // set new submission
-                    localStorage.setItem("all_user", JSON.stringify(all_users));
+                all_users.push(user)
+                // set new submission
+                localStorage.setItem("all_user", JSON.stringify(all_users));
 
-                    // get most recent submission
-                    var all_users_ls = JSON.parse(localStorage.getItem("all_user"));
-                    var lastUser = all_users_ls[all_users_ls.length - 1];
+                // get most recent submission
+                var all_users_ls = JSON.parse(localStorage.getItem("all_user"));
+                var lastUser = all_users_ls[all_users_ls.length - 1];
 
-                    //Now we have an array with the indexes and the messages called all_user
-                    //We want to display the items to the screen
-            
-                });
+            });
+
+
+            function displayUserInput() {
+                var valuesToDisplay = localStorage.getItem("all_user");
+
+                if (!valuesToDisplay) {
+                    valuesToDisplay = [];
+                } else {
+                    valuesToDisplay = JSON.parse(valuesToDisplay);
+                }
+                
+                //We need to get the index value from each entry
+                for(var i=0; i<valuesToDisplay.length; i++){
+                    var indexEntered = valuesToDisplay[i].index;
+                    var inputEntered = valuesToDisplay[i].input;
+                    if(indexEntered == 0){
+                        $("#nineamtext").val(inputEntered);
+                    }
+                    else if(indexEntered == 1){
+                        $("#tenamtext").val(inputEntered);
+                    }
+                    else if(indexEntered == 2){
+                        $("#elevenamtext").val(inputEntered);
+                    }
+                    else if(indexEntered == 3){
+                        $("#noontext").val(inputEntered);
+                    }
+                    else if(indexEntered == 4){
+                        $("#onepmtext").val(inputEntered);
+                    }
+                    else if(indexEntered == 5){
+                        $("#twopmtext").val(inputEntered);
+                    }
+                    else if(indexEntered == 6){
+                        $("#threepmtext").val(inputEntered);
+                    }
+                    else if(indexEntered == 7){
+                        $("#fourtext").val(inputEntered);
+                    }
+                    else if(indexEntered == 8){
+                        $("#fivepmtext").val(inputEntered);
+                    }
+                }
+
+            }
         });
     </script>
 </body>
