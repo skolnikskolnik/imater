@@ -10,7 +10,7 @@ In this program, the user will see the current month, date, and year, as well as
 
 If there are no previously saved items on the list, the user sees the following:
 
-![Starting screen](./images/no_entries.JPG)
+![Starting screen](./images/no_entries_real.JPG)
 
 If there is an entry, it will appear upon loading the page
 
