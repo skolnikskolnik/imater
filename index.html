@@ -26,48 +26,48 @@
         <!--Using button tags since they are in line-->
         <div class="row" id="nineam">
             <button class="hour">9-10 AM</button>
-            <button class="description">Test</button>
-            <button class="saveBtn">Test</button>
+            <input class="description nineam" type="text" id="nineamtext" name="nineamtext">
+            <button class="saveBtn nineam">Test</button>
         </div>
         <div class="row" id="tenam">
             <button class="hour">10-11 AM</button>
-            <button class="description">Test</button>
-            <button class="saveBtn">Test</button>
+            <input class="description tenam" type="text" id="tenamtext" name="tenamtext">
+            <button class="saveBtn tenam">Test</button>
         </div>
         <div class="row" id="elevenam">
             <button class="hour">11-12 PM</button>
-            <button class="description">Test</button>
-            <button class="saveBtn">Test</button>
+            <input class="description elevenam" type="text" id="elevenamtext" name="elevenamtext">
+            <button class="saveBtn elevenam">Test</button>
         </div>
         <div class="row" id="noon">
             <button class="hour">12-1 PM</button>
-            <button class="description">Test</button>
-            <button class="saveBtn">Test</button>
+            <input class="description noon" type="text" id="noontext" name="noontext">
+            <button class="saveBtn noon">Test</button>
         </div>
         <div class="row" id="onepm">
             <button class="hour">1-2 PM</button>
-            <button class="description">Test</button>
-            <button class="saveBtn">Test</button>
+            <input class="description onepm" type="text" id="onepmtext" name="onepmtext">
+            <button class="saveBtn onepm">Test</button>
         </div>
         <div class="row" id="twopm">
             <button class="hour">2-3 PM</button>
-            <button class="description">Test</button>
-            <button class="saveBtn">Test</button>
+            <input class="description twopm" type="text" id="twopmtext" name="twopmtext">
+            <button class="saveBtn twopm">Test</button>
         </div>
         <div class="row" id="threepm">
             <button class="hour">3-4 PM</button>
-            <button class="description">Test</button>
-            <button class="saveBtn">Test</button>
+            <input class="description threepm" type="text" id="threepmtext" name="threepmtext">
+            <button class="saveBtn threepm">Test</button>
         </div>
         <div class="row" id="fourpm">
             <button class="hour">4-5 PM</button>
-            <button class="description">Test</button>
-            <button class="saveBtn">Test</button>
+            <input class="description fourpm" type="text" id="fourpmtext" name="fourpmtext">
+            <button class="saveBtn fourpm">Test</button>
         </div>
         <div class="row" id="fivepm">
             <button class="hour">5-6 PM</button>
-            <button class="description">Test</button>
-            <button class="saveBtn">Test</button>
+            <input class="description" type="text" id="fivepmtext" name="fivepmtext">
+            <button class="saveBtn fivepm">Test</button>
         </div>
     </div>
 
@@ -85,13 +85,15 @@
             var year = date.getFullYear();
 
             //Display day of week, month, and year to the screen
+            var all_users = [];
             var dateDisplay = $("#currentDay");
             var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             dateDisplay.text(daysOfWeek[dayOfWeek] + ", " + months[month] + " " + dateOfMonth + ", " + year);
 
             //Have three modes, past, present, and future
-            var hourClass = $(".hour");
+            var hourClass = $(".description");
+
 
             //Three types of states: past, present, and future
 
@@ -102,18 +104,56 @@
                 var hourNumber = i + 9;
                 var hourClassIndividual = hourClass[i];
 
-                if(currentTimeFloor > hourNumber){
+                if (currentTimeFloor > hourNumber) {
                     hourClassIndividual.classList.add("past");
                 }
-                else if(currentTimeFloor == hourNumber){
+                else if (currentTimeFloor == hourNumber) {
                     hourClassIndividual.classList.add("present");
                 }
-                else{
+                else {
                     hourClassIndividual.classList.add("future");
                 }
             }
 
+            //Putting an event listener on the submit buttons that will save the text entered and display it permanently
+            var submitBtns = $(".saveBtn");
 
+            submitBtns.on("click", function () {
+                //Add a value to each element 
+                for (var i = 0; i < submitBtns.length; i++) {
+                    submitBtns[i].setAttribute("index", i);
+                    hourClass[i].setAttribute("index", i);
+                }
+
+                //Get the index of the button that was clicked
+                var thisIndex = ($(this).attr("index"));
+
+                //Now to get and store the input
+                var userInput = hourClass[thisIndex].value;
+
+                //The index is thisIndex and the value is userInput
+                event.preventDefault();
+
+                // create user object from submission
+                var user = {
+                    index: thisIndex,
+                    input: userInput,
+                };
+
+                // validate the fields
+
+                    all_users.push(user)
+                    // set new submission
+                    localStorage.setItem("all_user", JSON.stringify(all_users));
+
+                    // get most recent submission
+                    var all_users_ls = JSON.parse(localStorage.getItem("all_user"));
+                    var lastUser = all_users_ls[all_users_ls.length - 1];
+
+                    //Now we have an array with the indexes and the messages called all_user
+                    //We want to display the items to the screen
+            
+                });
         });
     </script>
 </body>
