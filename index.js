@@ -8,7 +8,6 @@ $(document).ready(function () {
     var year = date.getFullYear();
 
     //Display day of week, month, and year to the screen
-    var all_users = [];
     var dateDisplay = $("#currentDay");
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -41,22 +40,12 @@ $(document).ready(function () {
 
     //Putting an event listener on the submit buttons that will save the text entered and display it permanently
     var submitBtns = $(".saveBtn");
-
     submitBtns.on("click", function () {
-        //Add a value to each element 
-        for (var i = 0; i < submitBtns.length; i++) {
-            submitBtns[i].setAttribute("index", i);
-            hourClass[i].setAttribute("index", i);
-        }
-
         //Get the index of the button that was clicked
         var thisIndex = ($(this).attr("index"));
 
         //Now to get and store the input
         var userInput = hourClass[thisIndex].value;
-
-        //The index is thisIndex and the value is userInput
-        event.preventDefault();
 
         // create user object from submission
         var user = {
@@ -65,15 +54,22 @@ $(document).ready(function () {
         };
 
         // validate the fields
-
-        //all_users.push(user)
-        // set new submission
         localStorage.setItem(thisIndex, userInput);
     });
 
 
     function displayUserInput() {
-        //Need to get the items from local storage
-        
+        for (var i = 0; i < hourClass.length; i++) {
+            var i = parseInt(i);
+            var textToDisplay = localStorage.getItem(i);
+
+            if (textToDisplay) {
+                console.log("text");
+                i = parseFloat(i);
+                var displayElement = hourClass[i];
+                displayElement.innerHTML = textToDisplay;
+            }
+        }
     }
+
 });

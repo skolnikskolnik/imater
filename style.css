@@ -24,6 +24,8 @@ body {
   .description{
     white-space: pre-wrap;
     width: 80%;
+    color: white;
+    display: block;
   }
   
   .time-block{
