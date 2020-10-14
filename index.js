@@ -41,11 +41,17 @@ $(document).ready(function () {
     //Putting an event listener on the submit buttons that will save the text entered and display it permanently
     var submitBtns = $(".saveBtn");
     submitBtns.on("click", function () {
+        //Add a value to each element 
+        for (var i = 0; i < submitBtns.length; i++) {
+            submitBtns[i].setAttribute("index", i);
+            hourClass[i].setAttribute("index", i);
+        }
         //Get the index of the button that was clicked
         var thisIndex = ($(this).attr("index"));
 
         //Now to get and store the input
         var userInput = hourClass[thisIndex].value;
+        console.log(userInput);
 
         // create user object from submission
         var user = {
@@ -64,12 +70,10 @@ $(document).ready(function () {
             var textToDisplay = localStorage.getItem(i);
 
             if (textToDisplay) {
-                console.log("text");
                 i = parseFloat(i);
                 var displayElement = hourClass[i];
                 displayElement.innerHTML = textToDisplay;
             }
         }
     }
-
 });
