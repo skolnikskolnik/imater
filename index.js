@@ -72,7 +72,7 @@ $(document).ready(function () {
             if (textToDisplay) {
                 i = parseFloat(i);
                 var displayElement = hourClass[i];
-                displayElement.innerHTML = textToDisplay;
+                displayElement.value = textToDisplay;
             }
         }
     }
