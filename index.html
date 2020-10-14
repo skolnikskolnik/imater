@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="style.css" />
     <title>Work Day Scheduler</title>
 </head>
-
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <body>
     <header class="jumbotron">
         <h1 class="display-3">Work Day Scheduler</h1>
@@ -71,134 +72,8 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var date = new Date();
-            var dateOfMonth = date.getDate();
-            //Stores the month as a number (subtract one since it starts at zero)
-            var month = date.getMonth();
-            var hourOfDay = date.getHours();
-            var dayOfWeek = date.getDay();
-            var year = date.getFullYear();
-
-            //Display day of week, month, and year to the screen
-            var all_users = [];
-            var dateDisplay = $("#currentDay");
-            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            dateDisplay.text(daysOfWeek[dayOfWeek] + ", " + months[month] + " " + dateOfMonth + ", " + year);
-
-            //Have three modes, past, present, and future
-            var hourClass = $(".description");
-
-            //Check for existing local storage items
-            displayUserInput();
-            //Three types of states: past, present, and future
-
-            //For past, this occurs when Math.floor(current time) is less than the timeNumber
-            var currentTimeFloor = Math.floor(hourOfDay);
-
-            for (var i = 0; i < hourClass.length; i++) {
-                var hourNumber = i + 9;
-                var hourClassIndividual = hourClass[i];
-
-                if (currentTimeFloor > hourNumber) {
-                    hourClassIndividual.classList.add("past");
-                }
-                else if (currentTimeFloor == hourNumber) {
-                    hourClassIndividual.classList.add("present");
-                }
-                else {
-                    hourClassIndividual.classList.add("future");
-                }
-            }
-
-            //Putting an event listener on the submit buttons that will save the text entered and display it permanently
-            var submitBtns = $(".saveBtn");
-
-            submitBtns.on("click", function () {
-                //Add a value to each element 
-                for (var i = 0; i < submitBtns.length; i++) {
-                    submitBtns[i].setAttribute("index", i);
-                    hourClass[i].setAttribute("index", i);
-                }
-
-                //Get the index of the button that was clicked
-                var thisIndex = ($(this).attr("index"));
-
-                //Now to get and store the input
-                var userInput = hourClass[thisIndex].value;
-
-                //The index is thisIndex and the value is userInput
-                event.preventDefault();
-
-                // create user object from submission
-                var user = {
-                    index: thisIndex,
-                    input: userInput,
-                };
-
-                // validate the fields
-
-                all_users.push(user)
-                // set new submission
-                localStorage.setItem("all_user", JSON.stringify(all_users));
-
-                // get most recent submission
-                var all_users_ls = JSON.parse(localStorage.getItem("all_user"));
-                var lastUser = all_users_ls[all_users_ls.length - 1];
-
-            });
-
-
-            function displayUserInput() {
-                var valuesToDisplay = localStorage.getItem("all_user");
-
-                if (!valuesToDisplay) {
-                    valuesToDisplay = [];
-                } else {
-                    valuesToDisplay = JSON.parse(valuesToDisplay);
-                }
-                
-                //We need to get the index value from each entry
-                for(var i=0; i<valuesToDisplay.length; i++){
-                    var indexEntered = valuesToDisplay[i].index;
-                    var inputEntered = valuesToDisplay[i].input;
-                    if(indexEntered == 0){
-                        $("#nineamtext").val(inputEntered);
-                    }
-                    else if(indexEntered == 1){
-                        $("#tenamtext").val(inputEntered);
-                    }
-                    else if(indexEntered == 2){
-                        $("#elevenamtext").val(inputEntered);
-                    }
-                    else if(indexEntered == 3){
-                        $("#noontext").val(inputEntered);
-                    }
-                    else if(indexEntered == 4){
-                        $("#onepmtext").val(inputEntered);
-                    }
-                    else if(indexEntered == 5){
-                        $("#twopmtext").val(inputEntered);
-                    }
-                    else if(indexEntered == 6){
-                        $("#threepmtext").val(inputEntered);
-                    }
-                    else if(indexEntered == 7){
-                        $("#fourtext").val(inputEntered);
-                    }
-                    else if(indexEntered == 8){
-                        $("#fivepmtext").val(inputEntered);
-                    }
-                }
-
-            }
-        });
-    </script>
+    <script type = "text/javascript" src="index.js"></script>
+        
 </body>
 
 </html>
